@@ -3,14 +3,15 @@ set -euo pipefail
 
 # [START client-credentials.config]
 
-# Load environment variables from .env file
+# Credentials come from the environment. Also read .env when one happens to be
+# there, since the Shopify CLI writes credentials to that file.
 if [ -f .env ]; then
   export $(grep -v '^#' .env | xargs)
 fi
 
-: "${SHOPIFY_SHOP:?Set SHOPIFY_SHOP in .env}"
-: "${SHOPIFY_CLIENT_ID:?Set SHOPIFY_CLIENT_ID in .env}"
-: "${SHOPIFY_CLIENT_SECRET:?Set SHOPIFY_CLIENT_SECRET in .env}"
+: "${SHOPIFY_SHOP:?Set SHOPIFY_SHOP in your environment}"
+: "${SHOPIFY_CLIENT_ID:?Set SHOPIFY_CLIENT_ID in your environment}"
+: "${SHOPIFY_CLIENT_SECRET:?Set SHOPIFY_CLIENT_SECRET in your environment}"
 # [END client-credentials.config]
 
 # [START client-credentials.get-token]

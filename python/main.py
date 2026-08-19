@@ -4,6 +4,9 @@ import time
 import requests
 
 # [START client-credentials.config]
+# Credentials come from the environment. Also read .env when one happens to be
+# there, since the Shopify CLI writes credentials to that file. setdefault means
+# real environment variables win, so a platform's config always takes precedence.
 def load_dotenv(path=".env"):
     if not os.path.exists(path):
         return
@@ -23,7 +26,9 @@ CLIENT_ID = os.getenv("SHOPIFY_CLIENT_ID")
 CLIENT_SECRET = os.getenv("SHOPIFY_CLIENT_SECRET")
 
 if not SHOP or not CLIENT_ID or not CLIENT_SECRET:
-    raise RuntimeError("Set SHOPIFY_SHOP, SHOPIFY_CLIENT_ID, and SHOPIFY_CLIENT_SECRET in .env.")
+    raise RuntimeError(
+        "Set SHOPIFY_SHOP, SHOPIFY_CLIENT_ID, and SHOPIFY_CLIENT_SECRET in your environment."
+    )
 # [END client-credentials.config]
 
 # [START client-credentials.get-token]
