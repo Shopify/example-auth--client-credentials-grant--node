@@ -23,7 +23,7 @@ CLIENT_ID = os.getenv("SHOPIFY_CLIENT_ID")
 CLIENT_SECRET = os.getenv("SHOPIFY_CLIENT_SECRET")
 
 if not SHOP or not CLIENT_ID or not CLIENT_SECRET:
-    raise RuntimeError("Set SHOPIFY_SHOP, SHOPIFY_CLIENT_ID, and SHOPIFY_CLIENT_SECRET.")
+    raise RuntimeError("Set SHOPIFY_SHOP, SHOPIFY_CLIENT_ID, and SHOPIFY_CLIENT_SECRET in .env.")
 # [END client-credentials.config]
 
 # [START client-credentials.get-token]

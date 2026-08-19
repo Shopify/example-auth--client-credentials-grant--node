@@ -12,8 +12,13 @@ Example code for authenticating Shopify apps created in the Dev Dashboard using 
 
 ## Usage
 
-1. Replace the configuration values with your Client ID, Client Secret, and store subdomain
-2. Run the example for your preferred language
+1. Copy `.env.example` to `.env` and fill in your Client ID, Client Secret, and store subdomain. `.env` is gitignored, so your credentials stay out of version control.
+2. Run the example for your preferred language, from the repo root so it finds `.env`:
+   - `node node/index.js` — needs Node.js 20.12 or later
+   - `python python/main.py` — needs `requests`
+   - `sh curl/example.sh`
+
+All three samples read their credentials from the environment and fall back to `.env`, so real environment variables take precedence when you deploy.
 
 ## Note
 

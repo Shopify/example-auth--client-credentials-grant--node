@@ -1,13 +1,22 @@
+import { existsSync } from 'node:fs';
 import { URLSearchParams } from 'node:url';
 
 // [START client-credentials.config]
+// Read .env when it's present, so credentials come from a file in local dev and
+// from the platform's environment configuration in production. Real environment
+// variables win over the file, so you don't have to delete it to deploy.
+// loadEnvFile needs Node.js 20.12 or later, and throws if the file is missing.
+if (existsSync('.env')) {
+  process.loadEnvFile('.env');
+}
+
 const SHOP = process.env.SHOPIFY_SHOP;
 const CLIENT_ID = process.env.SHOPIFY_CLIENT_ID;
 const CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET;
 
 if (!SHOP || !CLIENT_ID || !CLIENT_SECRET) {
   throw new Error(
-    'Set SHOPIFY_SHOP, SHOPIFY_CLIENT_ID, and SHOPIFY_CLIENT_SECRET.'
+    'Set SHOPIFY_SHOP, SHOPIFY_CLIENT_ID, and SHOPIFY_CLIENT_SECRET in .env.'
   );
 }
 // [END client-credentials.config]
