@@ -1,13 +1,22 @@
+import { existsSync } from 'node:fs';
 import { URLSearchParams } from 'node:url';
 
 // [START client-credentials.config]
+// Credentials come from the environment. Also read .env when one happens to be
+// there, since the Shopify CLI writes credentials to that file. Real environment
+// variables win over the file, so a platform's config always takes precedence.
+// loadEnvFile needs Node.js 20.12 or later, and throws if the file is missing.
+if (existsSync('.env')) {
+  process.loadEnvFile('.env');
+}
+
 const SHOP = process.env.SHOPIFY_SHOP;
 const CLIENT_ID = process.env.SHOPIFY_CLIENT_ID;
 const CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET;
 
 if (!SHOP || !CLIENT_ID || !CLIENT_SECRET) {
   throw new Error(
-    'Set SHOPIFY_SHOP, SHOPIFY_CLIENT_ID, and SHOPIFY_CLIENT_SECRET.'
+    'Set SHOPIFY_SHOP, SHOPIFY_CLIENT_ID, and SHOPIFY_CLIENT_SECRET in your environment.'
   );
 }
 // [END client-credentials.config]
